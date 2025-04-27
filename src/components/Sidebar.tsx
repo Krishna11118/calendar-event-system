@@ -13,42 +13,57 @@ import {
   ChevronDown,
   LayoutList
 } from 'lucide-react';
+import { NavigationItem } from '../types';
 
 interface SidebarProps {
   isOpen: boolean;
   onClose: () => void;
+  onNavigate: (path: string) => void;
 }
 
-const Sidebar: React.FC<SidebarProps> = ({ isOpen, onClose }) => {
+const Sidebar: React.FC<SidebarProps> = ({ isOpen, onClose, onNavigate }) => {
   const navigation = [
     { 
       section: 'Manage',
       items: [
-        { name: 'Home', icon: Home, current: false },
-        { name: 'Programs', icon: FileText, current: false },
-        { name: 'Events', icon: Calendar, current: true },
-        { name: 'Memberships', icon: Users, current: false },
-        { name: 'Documents', icon: FileText, current: false },
+        { name: 'Home', icon: Home, current: false, onClick: () => onNavigate('/home') },
+        { name: 'Programs', icon: FileText, current: false, onClick: () => onNavigate('/programs') },
+        { name: 'Events', icon: Calendar, current: true, onClick: () => onNavigate('/events') },
+        { name: 'Memberships', icon: Users, current: false, onClick: () => onNavigate('/memberships') },
+        { name: 'Documents', icon: FileText, current: false, onClick: () => onNavigate('/documents') },
       ]
     },
     {
       section: 'Members',
       items: [
-        { name: 'Payments', icon: CreditCard, current: false },
+        { name: 'Payments', icon: CreditCard, current: false, onClick: () => onNavigate('/payments') },
       ]
     },
     {
       section: 'Engage',
       items: [
-        { name: 'People', icon: Users, current: false },
-        { name: 'Communication', icon: MessageSquare, current: false },
+        { name: 'People', icon: Users, current: false, onClick: () => onNavigate('/people') },
+        { name: 'Communication', icon: MessageSquare, current: false, onClick: () => onNavigate('/communication') },
       ]
     },
     {
       section: 'More',
       items: [
-        { name: 'Notifications', icon: Bell, current: false, badge: 2 },
-        { name: 'Search', icon: Search, current: false, shortcut: 'K', listIcon: LayoutList },
+        { 
+          name: 'Notifications', 
+          icon: Bell, 
+          current: false, 
+          badge: 2, 
+          onClick: () => onNavigate('/notifications') 
+        },
+        { 
+          name: 'Search', 
+          icon: Search, 
+          current: false, 
+          shortcut: 'K', 
+          listIcon: LayoutList,
+          onClick: () => onNavigate('/search')
+        },
       ]
     }
   ];
@@ -92,12 +107,12 @@ const Sidebar: React.FC<SidebarProps> = ({ isOpen, onClose }) => {
                   {group.section}
                 </h3>
                 <div className="">
-                  {group.items.map((item) => (
-                    <a
+                  {group.items.map((item: NavigationItem) => (
+                    <button
                       key={item.name}
-                      href="#"
+                      onClick={item.onClick}
                       className={`
-                        group flex items-center justify-between px-3 py-2 text-sm font-medium rounded-lg
+                        group flex items-center justify-between px-3 py-2 text-sm font-medium rounded-lg w-full
                         ${item.current
                           ? 'bg-purple-50 text-purple-700'
                           : 'text-gray-600 hover:bg-gray-50 hover:text-gray-900'
@@ -126,7 +141,7 @@ const Sidebar: React.FC<SidebarProps> = ({ isOpen, onClose }) => {
                           `}
                         />
                       )}
-                    </a>
+                    </button>
                   ))}
                 </div>
               </div>
@@ -134,7 +149,10 @@ const Sidebar: React.FC<SidebarProps> = ({ isOpen, onClose }) => {
           </div>
 
           <div className="flex-shrink-0 p-4 border-t border-gray-200">
-            <button className="flex items-center justify-between w-full group">
+            <button 
+              className="flex items-center justify-between w-full group"
+              onClick={() => onNavigate('/profile')}
+            >
               <div className="flex items-center min-w-0">
                 <img
                   className="h-8 w-8 rounded-full object-cover"
