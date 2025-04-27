@@ -136,7 +136,7 @@ const Calendar: React.FC<CalendarProps> = ({ onEventSelect }) => {
                 <div
                   key={day.toString()}
                   className={`
-                  min-h-[78px] p-1 md:p-2 border-b border-r relative
+                  min-h-[75px] p-1 md:p-2 border-b border-r relative
                   ${!isSameMonth(day, currentDate) ? 'bg-gray-50' : 'bg-white'}
                   ${isSelected ? 'border-b-2 border-b-purple-500' : ''}
                 `}

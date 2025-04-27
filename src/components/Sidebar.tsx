@@ -56,7 +56,7 @@ const Sidebar: React.FC<SidebarProps> = ({ isOpen, onClose }) => {
   return (
     <>
       <div 
-        className={`fixed inset-0  bg-gray-600 bg-opacity-75 transition-opacity md:hidden ${
+        className={`fixed inset-0 bg-gray-600 bg-opacity-75 transition-opacity md:hidden ${
           isOpen ? 'opacity-100' : 'opacity-0 pointer-events-none'
         }`}
         onClick={onClose}
@@ -69,8 +69,8 @@ const Sidebar: React.FC<SidebarProps> = ({ isOpen, onClose }) => {
         `}
       >
         <div className="flex flex-col h-full">
-          <div className="flex items-center 0 mx-4 rounded-lg mb-4 bg-white shadow justify-between mt-4 p-2 md:justify-start">
-            <div className="flex items-center  space-x-4">
+          <div className="flex items-center mx-4 rounded-lg mb-4 bg-purple-50 md:bg-white shadow-none md:shadow justify-between mt-4 p-2 md:justify-start">
+            <div className="flex items-center space-x-4">
               <div className="h-8 w-8 bg-purple-600 rounded-lg flex items-center justify-center">
                 <span className="text-white font-semibold">K</span>
               </div>
@@ -81,11 +81,11 @@ const Sidebar: React.FC<SidebarProps> = ({ isOpen, onClose }) => {
               onClick={onClose}
               className="p-2 rounded-md text-gray-400 hover:text-gray-500 hover:bg-gray-100 md:hidden"
             >
-              <X className="h-6 w-6" />
+              <X className="h-8 w-8 bg-white rounded" />
             </button>
           </div>
 
-          <div className="flex-1 overflow-y-auto px-3 ">
+          <div className="flex-1 overflow-y-auto px-3">
             {navigation.map((group, groupIdx) => (
               <div key={group.section} className={groupIdx > 0 ? 'mt-8' : ''}>
                 <h3 className="px-3 text-xs font-medium text-gray-400 uppercase tracking-wider">
